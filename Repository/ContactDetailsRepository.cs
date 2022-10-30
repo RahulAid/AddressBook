@@ -20,9 +20,9 @@ namespace AddressBook.Repository
         {
             var obj = contactDetails[mobileNumber];
             contactDetails.Remove(mobileNumber);
-            Console.WriteLine("\nChoose which value is to be edited \n 1.First Name \n 2.Last Name \n 3.Mobile Number \n 4.EMail Id \n 5.Address \n 6.City \n 7.State \n 8.Zip Code");
-            int option = Convert.ToInt32(Console.ReadLine());
-            switch (option)
+            Console.WriteLine("\nSelect from below to edit (Enter number 1-8) \n1.First Name \n2.Last Name \n3.Mobile Number \n4.EMail \n5.Address \n6.City \n7.State \n8.Zip");
+            int edit = Convert.ToInt32(Console.ReadLine());
+            switch (edit)
             {
                 case 1:
                     Console.WriteLine("\nEnter New First Name");
@@ -43,7 +43,7 @@ namespace AddressBook.Repository
                     contactDetails.Add(obj.MobileNumber, obj);
                     break;
                 case 4:
-                    Console.WriteLine("\nEnter New EMail Id");
+                    Console.WriteLine("\nEnter New Email Id");
                     string? email = Console.ReadLine();
                     obj.EMail = email;
                     contactDetails.Add(obj.MobileNumber, obj);
@@ -55,19 +55,19 @@ namespace AddressBook.Repository
                     contactDetails.Add(obj.MobileNumber, obj);
                     break;
                 case 6:
-                    Console.WriteLine("\nEnter New City");
+                    Console.WriteLine("\nEnter New City Name");
                     string? city = Console.ReadLine();
                     obj.City = city;
                     contactDetails.Add(obj.MobileNumber, obj);
                     break;
                 case 7:
-                    Console.WriteLine("\nEnter New State");
+                    Console.WriteLine("\nEnter New State Name");
                     string? state = Console.ReadLine();
                     obj.State = state;
                     contactDetails.Add(obj.MobileNumber, obj);
                     break;
                 case 8:
-                    Console.WriteLine("\n Enter New Zip Code");
+                    Console.WriteLine("\nEnter New Zip Code");
                     int zip = Convert.ToInt32(Console.ReadLine());
                     obj.Zip = zip;
                     contactDetails.Add(obj.MobileNumber, obj);
@@ -75,18 +75,24 @@ namespace AddressBook.Repository
             }
         }
 
+        public void DeleteContact(long mobileNumber)
+        {
+            var obj = contactDetails[mobileNumber];
+            contactDetails.Remove(mobileNumber);
+        }
+
         public void DisplayContact()
         {
             foreach (var item in contactDetails)
             {
-                Console.WriteLine($"\nFirst Name::{item.Value.FirstName}");
-                Console.WriteLine($"Last Name::{item.Value.LastName}");
-                Console.WriteLine($"Mobile Number::{item.Value.MobileNumber}");
-                Console.WriteLine($"EMail::{item.Value.EMail}");
-                Console.WriteLine($"Address::{item.Value.Address}");
-                Console.WriteLine($"City::{item.Value.City}");
-                Console.WriteLine($"State::{item.Value.State}");
-                Console.WriteLine($"Zip::{item.Value.Zip}");
+                Console.WriteLine($"\nFirst Name : {item.Value.FirstName}");
+                Console.WriteLine($"Last Name : {item.Value.LastName}");
+                Console.WriteLine($"Mobile Number : {item.Value.MobileNumber}");
+                Console.WriteLine($"EMail : {item.Value.EMail}");
+                Console.WriteLine($"Address : {item.Value.Address}");
+                Console.WriteLine($"City : {item.Value.City}");
+                Console.WriteLine($"State : {item.Value.State}");
+                Console.WriteLine($"Zip : {item.Value.Zip}");
             }
         }
     }

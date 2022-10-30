@@ -7,6 +7,7 @@ namespace AddressBook
     {
         static void Main(string[] args)
         {
+
             Console.WriteLine("Welcome to Address Book");
 
             ContactDetailsRepository contactDetails = new ContactDetailsRepository();
@@ -17,28 +18,28 @@ namespace AddressBook
 
             while (input == "E")
             {
-                Console.WriteLine("\nEnter First Name: ");
+                Console.WriteLine("\nEnter First Name : ");
                 string? firstName = Console.ReadLine();
 
-                Console.WriteLine("\nEnter Last Name: ");
+                Console.WriteLine("\nEnter Last Name : ");
                 string? lastName = Console.ReadLine();
 
-                Console.WriteLine("\nEnter Mobile Number: ");
+                Console.WriteLine("\nEnter Mobile Number : ");
                 long mobileNumber = Convert.ToInt64(Console.ReadLine());
 
-                Console.WriteLine("\nEnter EMail: ");
-                string? email = Console.ReadLine();
+                Console.WriteLine("\nEnter EMail Id : ");
+                string? eMail = Console.ReadLine();
 
-                Console.WriteLine("\nEnter Address: ");
+                Console.WriteLine("\nEnter Address : ");
                 string? address = Console.ReadLine();
 
-                Console.WriteLine("\nEnter City: ");
+                Console.WriteLine("\nEnter City Name : ");
                 string? city = Console.ReadLine();
 
-                Console.WriteLine("\nEnter State: ");
+                Console.WriteLine("\nEnter State Name : ");
                 string? state = Console.ReadLine();
 
-                Console.WriteLine("\nEnter Zip: ");
+                Console.WriteLine("\nEnter Zip Code : ");
                 int zip = Convert.ToInt32(Console.ReadLine());
 
                 Console.WriteLine("\nEnter X to Add Contact Details or enter E to exit.");
@@ -49,7 +50,7 @@ namespace AddressBook
                     FirstName = firstName,
                     LastName = lastName,
                     MobileNumber = mobileNumber,
-                    EMail = email,
+                    EMail = eMail,
                     Address = address,
                     City = city,
                     State = state,
@@ -59,10 +60,10 @@ namespace AddressBook
                 contactDetails.DisplayContact();
             }
 
-            Console.WriteLine("\nEnter S to edit Contact Details");
+            Console.WriteLine("\nEnter X to edit Contact Details");
             string? input2 = Console.ReadLine();
 
-            while (input2 == "S")
+            while (input2 == "X")
             {
                 Console.WriteLine("\nEnter Mobile Number");
                 contactDetails.EditContactDetails(Convert.ToInt64(Console.ReadLine()));
@@ -71,6 +72,19 @@ namespace AddressBook
                 Console.WriteLine("\nEnter Y to edit Contact Details or enter E to exit");
                 input2 = Console.ReadLine();
 
+            }
+
+            Console.WriteLine("\nEnter D to Delete a Contact");
+            string? input3 = Console.ReadLine();
+
+            while (input3 == "D")
+            {
+                Console.WriteLine("\nEnter Mobile Number");
+                contactDetails.DeleteContact(Convert.ToInt64(Console.ReadLine()));
+                Console.WriteLine("Contact Deleted");
+
+                Console.WriteLine("\nEnter Z to Delete a Contact or enter E to exit");
+                input3 = Console.ReadLine();
             }
 
             contactDetails.DisplayContact();
