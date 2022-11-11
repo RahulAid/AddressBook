@@ -1,5 +1,6 @@
 ﻿using AddressBook.Model;
 using AddressBook.Repository;
+using System;
 using System.Diagnostics.Metrics;
 
 namespace AddressBook
@@ -18,14 +19,14 @@ namespace AddressBook
                 Console.WriteLine("Choose the operation to be performed on Contact Details : \n1. Add Contact Details \n2. Edit Contact Details \n3. Delete Contact Details \n");
 
                 int choice = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("\nEnter a Unique Name for your Address Book : ");
+                string? uniqueName = Console.ReadLine();
 
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine("\nEnter A to Add Details");
-                        string? input1 = Console.ReadLine();
-                        while (input1 == "A")
-                        {
+                            Console.WriteLine("\nAdd Contact Details");
+                        
                             Console.WriteLine("\nEnter First Name : ");
                             string? firstName = Console.ReadLine();
 
@@ -55,6 +56,7 @@ namespace AddressBook
 
                             contactDetail = new ContactDetails()
                             {
+                                UniqueName = uniqueName,
                                 FirstName = firstName,
                                 LastName = lastName,
                                 MobileNumber = mobileNumber,
@@ -65,36 +67,23 @@ namespace AddressBook
                                 Zip = zip
                             };
                             contactDetails.AddContactDetails(contactDetail);
-                        }
+                        
                         break;
 
                     case 2:
                         {
-                            Console.WriteLine("\nEnter E to edit Contact Details");
-                            string? input2 = Console.ReadLine();
-
-                            while (input2 == "E")
-                            {
-                                Console.WriteLine("\nEnter Mobile Number");
-                                contactDetails.EditContactDetails(Convert.ToInt64(Console.ReadLine()));
-                                
-                            }
+                                Console.WriteLine("\nEdit Contact Details");                               
+                                contactDetails.EditContactDetails(uniqueName);
+                                                           
                             break;
                         }
 
                     case 3:
-                        {
-                            Console.WriteLine("\nEnter D to Delete a Contact");
-                            string? input3 = Console.ReadLine();
-
-                            while (input3 == "D")
-                            {
-                                Console.WriteLine("\nEnter Mobile Number");
-                                contactDetails.DeleteContact(Convert.ToInt64(Console.ReadLine()));
-                                Console.WriteLine("Contact Deleted");
+                        {                               
+                                contactDetails.DeleteContact(uniqueName);
+                                Console.WriteLine("Contact details are Deleted");
                                 
-                            }
-                            break;
+                                break;
                         }
 
                     default:
