@@ -2,6 +2,7 @@
 using AddressBook.Repository;
 using System;
 using System.Diagnostics.Metrics;
+using System.Runtime.Serialization;
 
 namespace AddressBook
 {
@@ -9,50 +10,54 @@ namespace AddressBook
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Address Book Prrogram");
-            ContactDetailsRepository contactDetails = new ContactDetailsRepository();
+
             bool flag = true;
-            while (flag)
+            ContactDetailsRepository contactDetails = new ContactDetailsRepository();
+            while (true)
             {
-                ContactDetails contactDetail = null;
-                
-                Console.WriteLine("Choose the operation to be performed on Contact Details : \n1. Add Contact Details \n2. Edit Contact Details \n3. Delete Contact Details \n");
+                ContactDetailsRepository contactDetailsRepository = new ContactDetailsRepository();
+                Console.WriteLine("\nWelcome to Address Book");
 
+                Console.WriteLine("\nEnter 1 to Add Contact Details. \nEnter 2 to Edit Contact Details. \nEnter 3 to Delete Contact Details. \nEnter 4 to Display all contacts. \n");
                 int choice = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("\nEnter a Unique Name for your Address Book : ");
-                string? uniqueName = Console.ReadLine();
 
+                ContactDetails contactDetail = null;
                 switch (choice)
                 {
                     case 1:
-                            Console.WriteLine("\nAdd Contact Details");
-                        
-                            Console.WriteLine("\nEnter First Name : ");
+                        Console.WriteLine("\nEnter X to Add Details");
+                        string input = Console.ReadLine();
+                        while (input == "X")
+                        {
+                            Console.WriteLine("\nEnter a Unique Name for Address Book");
+                            string? uniqueName = Console.ReadLine();
+
+                            Console.WriteLine("\nEnter First Name: ");
                             string? firstName = Console.ReadLine();
 
-                            Console.WriteLine("\nEnter Last Name : ");
+                            Console.WriteLine("\nEnter Last Name: ");
                             string? lastName = Console.ReadLine();
 
-                            Console.WriteLine("\nEnter Mobile Number : ");
+                            Console.WriteLine("\nEnter 10 Digit Mobile Number: ");
                             long mobileNumber = Convert.ToInt64(Console.ReadLine());
 
-                            Console.WriteLine("\nEnter EMail Id : ");
+                            Console.WriteLine("\nEnter EMail: ");
                             string? eMail = Console.ReadLine();
 
-                            Console.WriteLine("\nEnter Address : ");
+                            Console.WriteLine("\nEnter Address: ");
                             string? address = Console.ReadLine();
 
-                            Console.WriteLine("\nEnter City Name : ");
+                            Console.WriteLine("\nEnter City: ");
                             string? city = Console.ReadLine();
 
-                            Console.WriteLine("\nEnter State Name : ");
+                            Console.WriteLine("\nEnter State: ");
                             string? state = Console.ReadLine();
 
-                            Console.WriteLine("\nEnter Zip Code: ");
+                            Console.WriteLine("\nEnter 6 Digit Zip: ");
                             int zip = Convert.ToInt32(Console.ReadLine());
 
-                            Console.WriteLine("\nEnter any key to exit.");
-                            string? input = Console.ReadLine();
+                            Console.WriteLine("\nEnter X to Add Contact Details or enter E to exit.");
+                            input = Console.ReadLine();
 
                             contactDetail = new ContactDetails()
                             {
@@ -67,23 +72,46 @@ namespace AddressBook
                                 Zip = zip
                             };
                             contactDetails.AddContactDetails(contactDetail);
-                        
+                        }
                         break;
 
                     case 2:
                         {
-                                Console.WriteLine("\nEdit Contact Details");                               
-                                contactDetails.EditContactDetails(uniqueName);
-                                                           
+                            Console.WriteLine("\nEnter Y to edit Contact Details");
+                            string? input2 = Console.ReadLine();
+
+                            while (input2 == "Y")
+                            {
+                                Console.WriteLine("\nEnter Unique Address Book Name");
+                                contactDetails.EditContactDetails(Console.ReadLine());
+
+                                Console.WriteLine("\nEnter Y to edit Contact Details or enter E to exit");
+                                input2 = Console.ReadLine();
+                            }
                             break;
                         }
 
                     case 3:
-                        {                               
-                                contactDetails.DeleteContact(uniqueName);
-                                Console.WriteLine("Contact details are Deleted");
-                                
-                                break;
+                        {
+                            Console.WriteLine("\nEnter Z to Delete a Contact");
+                            string? input3 = Console.ReadLine();
+
+                            while (input3 == "Z")
+                            {
+                                Console.WriteLine("\nEnter Unique Addess Book Name");
+                                contactDetails.DeleteContact(Console.ReadLine());
+                                Console.WriteLine("Contact Deleted");
+
+                                Console.WriteLine("\nEnter Z to Delete a Contact or enter E to exit");
+                                input3 = Console.ReadLine();
+                            }
+                            break;
+                        }
+
+                    case 4:
+                        {
+                            contactDetails.DisplayContact();
+                            break;
                         }
 
                     default:
