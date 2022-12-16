@@ -14,7 +14,7 @@ namespace AddressBook
                 ContactDetailsRepository contactDetailsRepository = new ContactDetailsRepository();
                 Console.WriteLine("\nWelcome to Address Book");
 
-                Console.WriteLine("\nEnter 1 to Add Contact Details. \nEnter 2 to Edit Contact Details. \nEnter 3 to Delete Contact Details. \nEnter 4 to Search Contact. \nEnter 5 to Display all contacts");
+                Console.WriteLine("\nEnter 1 to Add Contact Details. \nEnter 2 to Edit Contact Details. \nEnter 3 to Delete Contact Details. \nEnter 4 to Search Contact. \nEnter 5 to Sort contacts \nEnter 6 to Display all contacts");
                 int choice = Convert.ToInt32(Console.ReadLine());
 
                 ContactDetails contactDetail = null;
@@ -112,7 +112,14 @@ namespace AddressBook
                             contactDetails.SearchContact();
                             break;
                         }
+
                     case 5:
+                        {
+                            contactDetails.Sort();
+                            break;
+                        }
+
+                    case 6:
                         {
                             contactDetails.DisplayContact();
                             break;

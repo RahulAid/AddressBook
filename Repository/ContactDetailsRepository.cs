@@ -149,11 +149,34 @@ namespace AddressBook.Repository
             }
         }
 
+        public void Sort()
+        {
+            Console.WriteLine("\nEnter 1 to Sort by Name");
+            int option = Convert.ToInt32(Console.ReadLine());
+            if (option == 1)
+            {
+                var objSort = contactDetails.OrderByDescending(x => x.Value.FirstName);
+                Console.WriteLine("\nSorted Contacts ====> ");
+                foreach (var item in objSort)
+                {
+                    Console.WriteLine($"\nUnique Name     ::{item.Value.UniqueName}");
+                    Console.WriteLine($"First Name      ::{item.Value.FirstName}");
+                    Console.WriteLine($"Last Name       ::{item.Value.LastName}");
+                    Console.WriteLine($"Mobile Number   ::{item.Value.MobileNumber}");
+                    Console.WriteLine($"EMail           ::{item.Value.EMail}");
+                    Console.WriteLine($"Address         ::{item.Value.Address}");
+                    Console.WriteLine($"City            ::{item.Value.City}");
+                    Console.WriteLine($"State           ::{item.Value.State}");
+                    Console.WriteLine($"Zip             ::{item.Value.Zip}");
+                }
+            }
+        }
+
         public void DisplayContact()
         {
+            Console.WriteLine("\n**********|| Address Book ||**********");
             foreach (var item in contactDetails)
             {
-                Console.WriteLine("\n**********|| Address Book ||**********");
                 Console.WriteLine($"\nUnique Name     ::{item.Value.UniqueName}");
                 Console.WriteLine($"First Name      ::{item.Value.FirstName}");
                 Console.WriteLine($"Last Name       ::{item.Value.LastName}");
