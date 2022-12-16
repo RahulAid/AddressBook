@@ -1,7 +1,5 @@
 ﻿using AddressBook.Model;
 using AddressBook.Repository;
-using System;
-using System.Diagnostics.Metrics;
 using System.Runtime.Serialization;
 
 namespace AddressBook
@@ -10,15 +8,13 @@ namespace AddressBook
     {
         static void Main(string[] args)
         {
-
-            bool flag = true;
             ContactDetailsRepository contactDetails = new ContactDetailsRepository();
             while (true)
             {
                 ContactDetailsRepository contactDetailsRepository = new ContactDetailsRepository();
                 Console.WriteLine("\nWelcome to Address Book");
 
-                Console.WriteLine("\nEnter 1 to Add Contact Details. \nEnter 2 to Edit Contact Details. \nEnter 3 to Delete Contact Details. \nEnter 4 to Display all contacts. \n");
+                Console.WriteLine("\nEnter 1 to Add Contact Details. \nEnter 2 to Edit Contact Details. \nEnter 3 to Delete Contact Details. \nEnter 4 to Search Contact. \nEnter 5 to Display all contacts");
                 int choice = Convert.ToInt32(Console.ReadLine());
 
                 ContactDetails contactDetail = null;
@@ -56,9 +52,6 @@ namespace AddressBook
                             Console.WriteLine("\nEnter 6 Digit Zip: ");
                             int zip = Convert.ToInt32(Console.ReadLine());
 
-                            Console.WriteLine("\nEnter X to Add Contact Details or enter E to exit.");
-                            input = Console.ReadLine();
-
                             contactDetail = new ContactDetails()
                             {
                                 UniqueName = uniqueName,
@@ -72,6 +65,10 @@ namespace AddressBook
                                 Zip = zip
                             };
                             contactDetails.AddContactDetails(contactDetail);
+                            contactDetails.DisplayContact();
+
+                            Console.WriteLine("\nEnter X to Add Contact Details or enter E to exit.");
+                            input = Console.ReadLine();
                         }
                         break;
 
@@ -85,6 +82,7 @@ namespace AddressBook
                                 Console.WriteLine("\nEnter Unique Address Book Name");
                                 contactDetails.EditContactDetails(Console.ReadLine());
 
+                                contactDetails.DisplayContact();
                                 Console.WriteLine("\nEnter Y to edit Contact Details or enter E to exit");
                                 input2 = Console.ReadLine();
                             }
@@ -102,6 +100,7 @@ namespace AddressBook
                                 contactDetails.DeleteContact(Console.ReadLine());
                                 Console.WriteLine("Contact Deleted");
 
+                                contactDetails.DisplayContact();
                                 Console.WriteLine("\nEnter Z to Delete a Contact or enter E to exit");
                                 input3 = Console.ReadLine();
                             }
@@ -110,17 +109,15 @@ namespace AddressBook
 
                     case 4:
                         {
+                            contactDetails.SearchContact();
+                            break;
+                        }
+                    case 5:
+                        {
                             contactDetails.DisplayContact();
                             break;
                         }
-
-                    default:
-                        {
-                            flag = false;
-                            break;
-                        }
                 }
-                contactDetails.DisplayContact();
             }
         }
     }
